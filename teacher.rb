@@ -1,4 +1,4 @@
-require 'person.rb'
+require 'person'
 
 class Teacher < Person
   def initialize(specialization, name = "Unknown", age = 5, parent_permission = true)
