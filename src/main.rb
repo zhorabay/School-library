@@ -8,14 +8,14 @@ class Main
   def main
     puts 'Welcome to School Library App'
     loop do
-      puts "\nPlease, choose an option by entering a number"
-      puts "1. List all books"
-      puts "2. List all people"
-      puts "3. Create a person"
-      puts "4. Create a book"
-      puts "5. Create a rental"
-      puts "6. List all rentals for a given person id"
-      puts "7. Exit"
+      puts '\nPlease, choose an option by entering a number'
+      puts '1. List all books'
+      puts '2. List all people'
+      puts '3. Create a person'
+      puts '4. Create a book'
+      puts '5. Create a rental'
+      puts '6. List all rentals for a given person id'
+      puts '7. Exit'
 
       choice = gets.chomp.to_i
 
@@ -38,10 +38,10 @@ class Main
           parent_permission_q = gets.chomp
 
           case parent_permission_q
-          when "Yes"
+          when 'Yes'
             @app.create_person(name, age, 'student')
             puts 'Person created successfully'
-          when "No"
+          when 'No'
             puts 'Student cannot rent a book'
           else
             puts 'Invalid parent permission choice. Please try again.'
