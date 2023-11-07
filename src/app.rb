@@ -1,6 +1,6 @@
-require 'person'
-require 'book'
-require 'rental'
+require './person'
+require './book'
+require './rental'
 
 class App
   def initialize

@@ -1,4 +1,4 @@
-require 'app'
+require './app'
 
 class Main
   def initialize
