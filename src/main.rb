@@ -10,25 +10,31 @@ class Main
     loop do
       display_menu
       choice = gets.chomp.to_i
-      case choice
-      when 1
-        list_books
-      when 2
-        list_people
-      when 3
-        create_person
-      when 4
-        create_book
-      when 5
-        create_rental
-      when 6
-        list_rentals_for_person
-      when 7
-        exit_app
-      else
-        puts 'Invalid option. Please try again.'
-      end
+      handle_choice(choice)
     end
+  end
+  
+  def handle_choice(choice)
+    case choice
+    when 1
+      list_books
+    when 2
+      list_people
+    when 3
+      create_person
+    when 4
+      create_book
+    when 5
+      create_rental
+    when 6
+      list_rentals_for_person
+    when 7
+      exit_app
+    else
+      puts 'Invalid option. Please try again.'
+    end
+  end
+  
   end
 
   def display_menu
@@ -86,8 +92,6 @@ class Main
     age = gets.chomp.to_i
     puts 'Name:'
     name = gets.chomp
-    puts 'Specialization:'
-    specialization = gets.chomp
     @app.create_person(name, age, 'teacher')
     puts 'Person created successfully'
   end
