@@ -13,7 +13,7 @@ class Main
       handle_choice(choice)
     end
   end
-  
+
   def handle_choice(choice)
     case choice
     when 1
