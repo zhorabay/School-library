@@ -34,8 +34,6 @@ class Main
       puts 'Invalid option. Please try again.'
     end
   end
-  
-  end
 
   def display_menu
     puts 'Please, choose an option by entering a number'
