@@ -1,4 +1,4 @@
-require_relative './app'
+require_relative 'app'
 
 class Main
   def initialize
@@ -73,8 +73,8 @@ class Main
     puts 'Name:'
     name = gets.chomp
     puts 'Has a parent permission? [Yes/No]'
-    parent_permission_q = gets.chomp
-    case parent_permission_q
+    parent_permission = gets.chomp
+    case parent_permission
     when 'Yes'
       @app.create_person(name, age, 'student')
       puts 'Person created successfully'
@@ -109,13 +109,13 @@ class Main
       puts "#{index + 1}. #{book.title} by #{book.author}"
     end
     book_choice = gets.chomp.to_i
-  
+
     puts 'Select a person from the following list by number (not ID)'
     @app.list_all_people.each_with_index do |person, index|
       puts "#{index + 1}. #{person.name}"
     end
     person_choice = gets.chomp.to_i
-  
+
     puts 'Date:'
     date = gets.chomp
     @app.create_rental(person_choice, book_choice, date)

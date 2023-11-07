@@ -1,8 +1,8 @@
-require_relative './person'
-require_relative './book'
-require_relative './rental'
-require_relative './teacher'
-require_relative './student'
+require_relative 'person'
+require_relative 'book'
+require_relative 'rental'
+require_relative 'teacher'
+require_relative 'student'
 
 class App
   def initialize
@@ -26,9 +26,9 @@ class App
   def create_person(name, age, type)
     if type == 'student'
       puts 'Has a parent permission? [Yes/No]'
-      parent_permission_q = gets.chomp.downcase
+      parent_permission = gets.chomp.downcase
 
-      if parent_permission_q == 'yes'
+      if parent_permission == 'yes'
         parent_permission = true
         person = Student.new(name, age, parent_permission: parent_permission)
       else
@@ -56,12 +56,12 @@ class App
   def create_rental(person_id, book_id, date)
     person = @people.find { |p| p.id == person_id }
     book = @books.find { |b| b.id == book_id }
-  
+
     if person.nil? || book.nil?
       puts 'Person or book not found.'
       return
     end
-  
+
     rental = Rental.new(date, book, person)
     @rentals.push(rental)
     puts 'Rental created successfully'
