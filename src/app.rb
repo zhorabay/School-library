@@ -34,8 +34,6 @@ class App
       else
         parent_permission = false
       end
-
-      person = Student.new(name, age, parent_permission: parent_permission)
     elsif type == 'teacher'
       puts 'Specialization:'
       specialization = gets.chomp
