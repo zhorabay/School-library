@@ -19,7 +19,7 @@ class App
 
   def list_all_people
     @people.each do |person|
-      puts "Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      puts "Name: #{person.name}, Age: #{person.age}, ID: #{person.id}"
     end
   end
 
@@ -54,14 +54,14 @@ class App
   end
 
   def create_rental(person_id, book_id, date)
-    person = @people.list_all_people { |p| p.id == person_id }
-    book = @books.list_all_books { |b| b.id == book_id }
-
+    person = @people.find { |p| p.id == person_id }
+    book = @books.find { |b| b.id == book_id }
+  
     if person.nil? || book.nil?
       puts 'Person or book not found.'
       return
     end
-
+  
     rental = Rental.new(date, book, person)
     @rentals.push(rental)
     puts 'Rental created successfully'
