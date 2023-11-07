@@ -31,8 +31,6 @@ class App
       if parent_permission == 'yes'
         parent_permission = true
         person = Student.new(name, age, parent_permission: parent_permission)
-      else
-        parent_permission = false
       end
     elsif type == 'teacher'
       puts 'Specialization:'
