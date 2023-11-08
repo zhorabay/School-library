@@ -23,37 +23,32 @@ class App
     end
   end
 
-  def create_person(name, age, type)
+  def create_person(age, name, type)
     if type == 'student'
-      puts 'Has a parent permission? [Yes/No]'
       parent_permission = gets.chomp.downcase
-
-      if parent_permission == 'yes'
+  
+      if parent_permission == 'Yes'
         parent_permission = true
-        person = Student.new(name, age, parent_permission: parent_permission)
+        person = Student.new(age, name, parent_permission: parent_permission)
+        @people.push(person)
+        puts 'Person created successfully'
       end
     elsif type == 'teacher'
-      puts 'Specialization:'
-      specialization = gets.chomp
-      person = Teacher.new(name, age, specialization)
-    else
-      puts 'Invalid person type.'
-      return
+      person = Teacher.new(age, name, specialization)
+      @people.push(person)
+      puts 'Person created successfully'
     end
-
-    @people.push(person)
-    puts 'Person created successfully'
-  end
+  end  
 
   def create_book(title, author)
     book = Book.new(title, author)
     @books.push(book)
-    puts 'Book created successfully'
   end
 
   def create_rental(person_id, book_id, date)
     person = @people.find { |p| p.id == person_id }
     book = @books.find { |b| b.id == book_id }
+    date = gets.chomp
 
     if person.nil? || book.nil?
       puts 'Person or book not found.'

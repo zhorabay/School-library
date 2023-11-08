@@ -3,6 +3,7 @@ require_relative 'app'
 class Main
   def initialize
     @app = App.new
+    @people = []
   end
 
   def main
@@ -36,6 +37,7 @@ class Main
   end
 
   def display_menu
+    puts ' '
     puts 'Please, choose an option by entering a number'
     puts '1. List all books'
     puts '2. List all people'
@@ -51,7 +53,7 @@ class Main
   end
 
   def list_people
-    @app.list_all_people
+    @app.list_all_books
   end
 
   def create_person
@@ -76,7 +78,7 @@ class Main
     parent_permission = gets.chomp
     case parent_permission
     when 'Yes'
-      @app.create_person(name, age, 'student')
+      @app.create_person(age, name, parent_permission: parent_permission)
       puts 'Person created successfully'
     when 'No'
       puts 'Student cannot rent a book'
@@ -90,7 +92,9 @@ class Main
     age = gets.chomp.to_i
     puts 'Name:'
     name = gets.chomp
-    @app.create_person(name, age, 'teacher')
+    puts 'Specialization:'
+    specialization = gets.chomp
+    @app.create_person(age, name, specialization)
     puts 'Person created successfully'
   end
 
@@ -118,7 +122,7 @@ class Main
 
     puts 'Date:'
     date = gets.chomp
-    @app.create_rental(person_choice, book_choice, date)
+    @app.create_rental(book_choice, person_choice, date)
     puts 'Rental created successfully'
   end
 
