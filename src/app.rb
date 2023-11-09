@@ -19,26 +19,19 @@ class App
 
   def list_all_people
     @people.each do |person|
-      puts "Name: #{person.name}, Age: #{person.age}, ID: #{person.id}"
+      puts "Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
   end
 
   def create_person(age, name, type)
     if type == 'student'
-      parent_permission = gets.chomp.downcase
-  
-      if parent_permission == 'Yes'
-        parent_permission = true
-        person = Student.new(age, name, parent_permission: parent_permission)
-        @people.push(person)
-        puts 'Person created successfully'
-      end
-    elsif type == 'teacher'
-      person = Teacher.new(age, name, specialization)
+      person = Student.new(age, name)
       @people.push(person)
-      puts 'Person created successfully'
+    elsif type == 'teacher'
+      person = Teacher.new(age, name)
+      @people.push(person)
     end
-  end  
+  end
 
   def create_book(title, author)
     book = Book.new(title, author)

@@ -53,7 +53,7 @@ class Main
   end
 
   def list_people
-    @app.list_all_books
+    @app.list_all_people
   end
 
   def create_person
@@ -77,8 +77,8 @@ class Main
     puts 'Has a parent permission? [Yes/No]'
     parent_permission = gets.chomp
     case parent_permission
-    when 'Yes'
-      @app.create_person(age, name, parent_permission: parent_permission)
+    when 'Yes', 'yes', 'y'
+      @app.create_person(age, name, 'student')
       puts 'Person created successfully'
     when 'No'
       puts 'Student cannot rent a book'
@@ -94,7 +94,7 @@ class Main
     name = gets.chomp
     puts 'Specialization:'
     specialization = gets.chomp
-    @app.create_person(age, name, specialization)
+    @app.create_person(age, name, 'teacher')
     puts 'Person created successfully'
   end
 
