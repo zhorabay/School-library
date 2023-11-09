@@ -78,7 +78,7 @@ class Main
     parent_permission = gets.chomp
     case parent_permission
     when 'Yes', 'yes', 'y'
-      @app.create_person(age, name, 'student')
+      @app.create_person('student', age, parent_permission, name)
       puts 'Person created successfully'
     when 'No'
       puts 'Student cannot rent a book'
@@ -94,7 +94,7 @@ class Main
     name = gets.chomp
     puts 'Specialization:'
     specialization = gets.chomp
-    @app.create_person(age, name, 'teacher')
+    @app.create_person('teacher', age, specialization, name)
     puts 'Person created successfully'
   end
 
@@ -112,24 +112,23 @@ class Main
     @app.list_all_books.each_with_index do |book, index|
       puts "#{index + 1}. #{book.title} by #{book.author}"
     end
-    book_choice = gets.chomp.to_i
+    book_index = gets.chomp.to_i
 
     puts 'Select a person from the following list by number (not ID)'
     @app.list_all_people.each_with_index do |person, index|
       puts "#{index + 1}. #{person.name}"
     end
-    person_choice = gets.chomp.to_i
+    person_index = gets.chomp.to_i
 
     puts 'Date:'
     date = gets.chomp
-    @app.create_rental(book_choice, person_choice, date)
+    @app.create_rental(person_index, book_index, date)
     puts 'Rental created successfully'
   end
 
   def list_rentals_for_person
     puts 'ID of person:'
     person_id = gets.chomp.to_i
-    puts 'Rentals:'
     @app.list_rentals_for_person(person_id)
   end
 

@@ -23,12 +23,12 @@ class App
     end
   end
 
-  def create_person(age, name, type)
+  def create_person(type, name, age, parent_permission)
     if type == 'student'
-      person = Student.new(age, name)
+      person = Student.new(age, name, parent_permission)
       @people.push(person)
     elsif type == 'teacher'
-      person = Teacher.new(age, name)
+      person = Teacher.new(age, name, parent_permission)
       @people.push(person)
     end
   end
@@ -38,32 +38,30 @@ class App
     @books.push(book)
   end
 
-  def create_rental(person_id, book_id, date)
-    person = @people.find { |p| p.id == person_id }
-    book = @books.find { |b| b.id == book_id }
-    date = gets.chomp
+  def create_rental(person_index, book_index, date)
+    person = @people.find { |p| p.id == person_index }
+    book = @books.find { |b| b.title == book_index }
 
-    if person.nil? || book.nil?
-      puts 'Person or book not found.'
-      return
+    if person && book
+      rental = Rental.new(date, book, person)
+      @rentals.push(rental)
+      puts "Book rented successfully"
+    else
+      puts "Person or book not found."
     end
-
-    rental = Rental.new(date, book, person)
-    @rentals.push(rental)
-    puts 'Rental created successfully'
   end
 
   def list_rentals_for_person(person_id)
     person = @people.find { |p| p.id == person_id }
-    if person.nil?
-      puts 'Person not found.'
-      return
-    end
 
-    rentals = @rentals.select { |r| r.person == person }
-    puts "Rentals: #{person.name}:"
-    rentals.each do |rental|
-      puts "Date: #{rental.date}, Book #{rental.book.title} by #{rental.book.author},"
+    if person
+      puts "Rentals for #{person.name}:"
+      @books.each do |book|
+        rentals = book.rentals.select { |r| r.include?(person.name) }
+        rentals.each { |rental| puts "#{book.title} - #{rental}" }
+      end
+    else
+      puts "Person not found."
     end
   end
 end
