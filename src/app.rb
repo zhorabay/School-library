@@ -38,30 +38,50 @@ class App
     @books.push(book)
   end
 
-  def create_rental(person_index, book_index, date)
-    person = @people.find { |p| p.id == person_index }
-    book = @books.find { |b| b.title == book_index }
-
-    if person && book
-      rental = Rental.new(date, book, person)
-      @rentals.push(rental)
-      puts "Book rented successfully"
+  def rental_selection
+    if @books.empty?
+      puts 'No book record found'
+    elsif @people.empty?
+      puts 'No person record found'
     else
-      puts "Person or book not found."
+      puts 'Select a book from the following list by number'
+      @books.each_with_index do |book, index|
+        puts "#{index}) Title: #{book.title}, Author: #{book.author}"
+      end
+      book_index = gets.chomp.to_i
+
+      puts 'Select a person from the following list by number (not ID)'
+      @people.each_with_index do |person, index|
+        puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      end
+      person_index = gets.chomp.to_i
+
+      print 'Date: '
+      date = gets.chomp
+      create_rental(date, book_index, person_index)
+    end
+  end
+
+  def create_rental(date, book_index, person_index)
+    if book_index >= 0 && book_index < @books.length
+      book = @books[book_index]
+      person = @people[person_index]
+      rental = Rental.new(date, book, person)
+      book.add_rental(rental)
+      person.add_rental(rental)
+      @rentals.push(rental)
+      puts 'Rental created successfully.'
+    else
+      puts 'Invalid book index. Please select a valid book.'
     end
   end
 
   def list_rentals_for_person(person_id)
-    person = @people.find { |p| p.id == person_id }
+    rentals = @rentals.filter { |rental| rental.person.id == person_id }
 
-    if person
-      puts "Rentals for #{person.name}:"
-      @books.each do |book|
-        rentals = book.rentals.select { |r| r.include?(person.name) }
-        rentals.each { |rental| puts "#{book.title} - #{rental}" }
-      end
-    else
-      puts "Person not found."
+    puts 'Rentals:'
+    rentals.each do |rental|
+      puts "Date: #{rental.date}, Book '#{rental.book.title}' by #{rental.book.author}"
     end
   end
 end
