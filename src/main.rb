@@ -3,7 +3,6 @@ require_relative 'app'
 class Main
   def initialize
     @app = App.new
-    @people = []
   end
 
   def main
@@ -17,20 +16,13 @@ class Main
 
   def handle_choice(choice)
     case choice
-    when 1
-      list_books
-    when 2
-      list_people
-    when 3
-      create_person
-    when 4
-      create_book
-    when 5
-      create_rental
-    when 6
-      list_rentals_for_person
-    when 7
-      exit_app
+    when 1 then @app.list_all_books
+    when 2 then @app.list_all_people
+    when 3 then @app.create_a_person
+    when 4 then @app.create_book
+    when 5 then @app.rental_selection
+    when 6 then @app.list_rentals_for_person
+    when 7 then exit_app
     else
       puts 'Invalid option. Please try again.'
     end
@@ -46,30 +38,6 @@ class Main
     puts '5. Create a rental'
     puts '6. List all rentals for a given person id'
     puts '7. Exit'
-  end
-
-  def list_books
-    @app.list_all_books
-  end
-
-  def list_people
-    @app.list_all_people
-  end
-
-  def create_person
-    @app.create_a_person
-  end
-
-  def create_book
-    @app.create_book
-  end
-
-  def create_rental
-    @app.rental_selection
-  end
-
-  def list_rentals_for_person
-    @app.list_rentals_for_person
   end
 
   def exit_app
