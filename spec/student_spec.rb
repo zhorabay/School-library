@@ -23,4 +23,8 @@ describe Student do
     student.classroom = classroom
     expect(classroom.students.count(student)).to eq(1)
   end
+
+  it 'should play hooky and return a shrug emoticon' do
+    expect(student.play_hooky).to eq('¯\\(ツ)/¯')
+  end
 end
