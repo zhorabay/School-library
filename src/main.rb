@@ -57,54 +57,11 @@ class Main
   end
 
   def create_person
-    puts 'Do you want to create a student (1) or a teacher (2)?'
-    role_choice = gets.chomp.to_i
-    case role_choice
-    when 1
-      create_student
-    when 2
-      create_teacher
-    else
-      puts 'Invalid role choice. Please try again.'
-    end
-  end
-
-  def create_student
-    puts 'Age:'
-    age = gets.chomp.to_i
-    puts 'Name:'
-    name = gets.chomp
-    puts 'Has a parent permission? [Yes/No]'
-    parent_permission = gets.chomp
-    case parent_permission
-    when 'Yes', 'yes', 'y'
-      @app.create_person('student', age, parent_permission, name)
-      puts 'Person created successfully'
-    when 'No'
-      puts 'Student cannot rent a book'
-    else
-      puts 'Invalid parent permission choice. Please try again.'
-    end
-  end
-
-  def create_teacher
-    puts 'Age:'
-    age = gets.chomp.to_i
-    puts 'Name:'
-    name = gets.chomp
-    puts 'Specialization:'
-    specialization = gets.chomp
-    @app.create_person('teacher', age, specialization, name)
-    puts 'Person created successfully'
+    @app.create_a_person
   end
 
   def create_book
-    puts 'Title:'
-    title = gets.chomp
-    puts 'Author:'
-    author = gets.chomp
-    @app.create_book(title, author)
-    puts 'Book created successfully'
+    @app.create_book
   end
 
   def create_rental
@@ -112,9 +69,7 @@ class Main
   end
 
   def list_rentals_for_person
-    print 'ID of person: '
-    person_id = gets.chomp.to_i
-    @app.list_rentals_for_person(person_id)
+    @app.list_rentals_for_person
   end
 
   def exit_app
